@@ -1,0 +1,60 @@
+<div class="app-container">
+  <h1>Regisztráció</h1>
+
+  <div class="alert alert-danger" role="alert">Sikertelen regisztrációs kísérlet:
+    <ul>
+
+      <li>Hibaüzenet</li>
+
+    </ul>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form class="form-horizontal" action="regAction" method="POST">
+
+        <div class="form-group">
+          <label for="inputEmail" class="col-sm-4 control-label">Felhasználónév</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="inputUser" name="username" placeholder="Felhasználónév"
+                   value="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputEmail" class="col-sm-4 control-label">E-mail cím</label>
+          <div class="col-sm-8">
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="E-mail cím" value="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputIsAdmin" class="col-sm-4 control-label">Admin</label>
+          <div class="col-sm-8">
+            <select id="inputIsAdmin" class="form-control" name="isAdmin">
+              <option value="false" selected>Nem</option>
+              <option value="true">Igen</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="col-sm-4 control-label">Jelszó</label>
+          <div class="col-sm-8">
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPasswordAgain" class="col-sm-4 control-label">Jelszó ismét</label>
+          <div class="col-sm-8">
+            <input type="password" class="form-control" id="inputPasswordAgain" name="password_again"
+                   placeholder="Jelszó">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-8">
+            <button type="submit" class="btn btn-success">Regisztráció</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

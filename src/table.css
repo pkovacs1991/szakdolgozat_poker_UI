@@ -1,0 +1,159 @@
+.main {
+  width: 1500px;
+}
+
+.table {
+  background-color: green;
+  height: 500px;
+  width: 80%;
+  border-radius: 50%;
+  margin: 0 auto;
+  border: 1em solid black;
+}
+
+.board {
+    float: left;
+    margin-top: 170px;
+    margin-left: 415px;
+}
+
+.cards {
+    width: 320px;
+    height: 85px;
+}
+
+.bet {
+    margin-top: 15px;
+    margin-left: 120px;
+
+}
+.card-small {
+  border: .2em solid black;
+  border-radius: 10%;
+  height: 80px;
+  width: 56px; /*70% of height*/
+  margin-right: 5px;
+  float: left;
+  background-color: white;
+ }
+
+.card-mine {
+  border: .2em solid black;
+  border-radius: 10%;
+  height: 80px;
+  width: 56px; /*70% of height*/
+  margin-right: 5px;
+  float: left;
+  background-color: white;
+ }
+
+.card-text {
+  margin: 0;
+  margin-top: 15%;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 0;
+}
+
+.card-img {
+  text-align: center;
+  margin: 0;
+  font-size: 2em;
+}
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+
+.player {
+    width: 100px;
+    height: 50px;
+    position: relative;
+    margin: 10px;
+    
+}
+
+.player-left-box {
+    width: 100px;
+    height: 50px;
+    float:left;
+    
+}
+.player-bottom-box {
+    
+    width: 80%;
+    height: 50px;
+    float: left;
+    
+}
+
+
+.player-right-box {
+    width: 100px;
+    height: 50px;
+    float:right;
+    
+}
+
+.top {
+    margin-top: 100px;
+}
+
+.middle {
+    margin-top: 200px;
+}
+
+.bottom {
+    float:right;
+    width: 150px;
+}
+
+.right {
+    float: left;
+    margin-top: 550px;
+    margin-left: 18%;
+}
+
+.my-tools{
+    
+    float: right;
+    border: solid black;
+    border-radius: 10%;
+    width: 350px;
+    height: 275px;
+}
+
+.my-cards{
+    margin-top: 30px;
+}
+
+.informations {
+    margin-left: 10px;
+    margin-top: 15px; 
+    width: 150px;
+    height: 250px;
+    float: left
+}
+
+
+.my-options {
+    margin-top: 15px;
+    float: right;
+    width: 145px;
+    height: 250px;
+}
+
+.option {
+    padding: 2px;
+}
+
+.raise {
+    float: left;
+    width: 50px;
+    margin-right: 5px; 
+}
