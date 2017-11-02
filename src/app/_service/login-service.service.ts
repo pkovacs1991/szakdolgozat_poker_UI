@@ -1,26 +1,43 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Http, Headers, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import {User} from '../_models/user';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class LoginService {
-  constructor(private http: Http) { }
+  headers = new Headers({
+    'Content-Type': 'application/json'
+  });
 
-  login(username: string, password: string) {
-    return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
-      .map((response: Response) => {
-        // login successful if there's a jwt token in the response
-        let user = response.json();
-        if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        }
-      });
+  @Output() loggedInUser: EventEmitter<any> = new EventEmitter();
+  constructor(private http: Http, private router: Router) {
+    console.log(localStorage.getItem('currentUser'));
+    this.loggedInUser.emit(localStorage.getItem('currentUser'));
   }
+
+   login(user: User) {
+    console.log('login');
+
+    return this.http.post('http://localhost:3000/api/v1/auth/login', JSON.stringify(user), {headers: this.headers})
+      .map((res: Response) => res.json()).subscribe(
+        data => {
+          console.log(data);
+          localStorage.setItem('currentUser', data);
+          console.log(localStorage.getItem('currentUser'));
+          this.router.navigate(['tables']);
+          this.loggedInUser.emit(data);
+        },
+        err => console.error(err),
+        );
+   }
 
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    this.loggedInUser.emit( null);
   }
 }
+

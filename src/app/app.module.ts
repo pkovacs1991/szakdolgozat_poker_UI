@@ -13,14 +13,16 @@ import { TableComponent } from './table/table.component';
 import {BaseRequestOptions, Http, HttpModule} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {FakeBackEndProvider} from './_helpers/fake-backend.provider';
-import {LoginService} from "./_service/login-service.service";
+import {LoginService} from './_service/login-service.service';
+import {FormsModule} from '@angular/forms';
+import {AuthGuard} from './_guards/AuthGuard';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'tables', component: TablesComponent },
-  { path: 'table/:id', component: TableComponent },
+  { path: 'tables', component: TablesComponent, canActivate: [AuthGuard]  },
+  { path: 'table/:id', component: TableComponent, canActivate: [AuthGuard]  },
   { path: '',
     redirectTo: 'login',
     pathMatch: 'full'
@@ -46,13 +48,15 @@ const appRoutes: Routes = [
       { enableTracing: true, useHash: true  } // <-- debugging purposes only
     ),
     BrowserModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   providers: [
     LoginService,
     FakeBackEndProvider,
     MockBackend,
-    BaseRequestOptions
+    BaseRequestOptions,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

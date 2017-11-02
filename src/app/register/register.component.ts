@@ -10,6 +10,8 @@ export class RegisterComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+
   }
 
 }
