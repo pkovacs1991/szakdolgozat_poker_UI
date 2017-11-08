@@ -10,12 +10,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RegisterComponent } from './register/register.component';
 import { TablesComponent } from './tables/tables.component';
 import { TableComponent } from './table/table.component';
-import {BaseRequestOptions, Http, HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import {MockBackend} from '@angular/http/testing';
 import {FakeBackEndProvider} from './_helpers/fake-backend.provider';
 import {LoginService} from './_service/login-service.service';
 import {FormsModule} from '@angular/forms';
 import {AuthGuard} from './_guards/AuthGuard';
+import {RegisterService} from './_service/register-service.service';
 
 
 const appRoutes: Routes = [
@@ -48,14 +49,14 @@ const appRoutes: Routes = [
       { enableTracing: true, useHash: true  } // <-- debugging purposes only
     ),
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [
     LoginService,
+    RegisterService,
     FakeBackEndProvider,
     MockBackend,
-    BaseRequestOptions,
     AuthGuard
   ],
   bootstrap: [AppComponent]

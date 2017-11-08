@@ -28,11 +28,26 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    this.loginService.login(this.user);
+    let cold = this.loginService.login(this.user);
 
-    if (localStorage.getItem('currentUser')) {
-      this.router.navigate(['tables']);
-    }
+    cold.subscribe(
+      (data) => {console.log(data);
+        localStorage.setItem('currentUser', data.username);
+        console.log(localStorage.getItem('currentUser'));
+        this.loginService.loggedInUser.emit(data);
+      },
+      err => console.log('ERROR!!!'),
+      () => {
+
+          console.log('Got response from API');
+          if (localStorage.getItem('currentUser')) {
+            this.router.navigate(['tables']);
+          }
+        }
+    );
+
+
+
 
   }
 
