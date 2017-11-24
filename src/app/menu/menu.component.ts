@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../_models/user';
-import {LoginService} from '../_service/login-service.service';
+import {LoginService} from '../_service/login.service';
 
 @Component({
   selector: 'app-menu',

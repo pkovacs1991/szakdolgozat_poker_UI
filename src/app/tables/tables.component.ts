@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TableService} from '../_service/table.service';
 
 @Component({
   selector: 'app-tables',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablesComponent implements OnInit {
 
-  constructor() { }
+  tables = [];
+
+  constructor(private tableService: TableService) { }
 
   ngOnInit() {
+
+    this.tableService.getTables().subscribe(tables => {
+      this.tables = tables;
+    });
   }
 
 }

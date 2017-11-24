@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LoginService} from '../_service/login-service.service';
+import {LoginService} from '../_service/login.service';
 import {User} from '../_models/user';
 import {Router} from '@angular/router';
 
@@ -28,11 +28,11 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    let cold = this.loginService.login(this.user);
-
-    cold.subscribe(
-      (data) => {console.log(data);
-        localStorage.setItem('currentUser', data.username);
+    this.loginService.login(this.user).subscribe(
+      (data) => {
+        console.log(data);
+        localStorage.setItem('currentUser', data.user.username);
+        localStorage.setItem('token', data.token);
         console.log(localStorage.getItem('currentUser'));
         this.loginService.loggedInUser.emit(data);
       },

@@ -17,63 +17,28 @@
       </div>
     </div>
   </form>
-  <h2>Találatok (4)</h2>
-  <div class="row">
-    <div class="col-md-4">
-      <a class="result-item" href="#table/1">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <strong>Játékosok száma 1/6</strong>
-            <br>
-            <strong>Minimum limit: 200</strong>
-            <br>
-            <strong>Aktuális vak : 1000</strong>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-4">
-      <a class="result-item" href="#table/2">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <strong>Játékosok száma 4/6</strong>
-            <br>
-            <strong>Minimum limit: 1000</strong>
-            <br>
-            <strong>Aktuális vak : 10000</strong>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-4">
-      <a class="result-item" href="#table/3">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <strong>Játékosok száma 2/6</strong>
-            <br>
-            <strong>Minimum limit: 100</strong>
-            <br>
-            <strong>Aktuális vak : 500</strong>
-          </div>
-        </div>
-      </a>
-    </div>
+  <h2>Találatok ({{tables.length}})</h2>
+  <div class="row" >
 
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <a class="result-item" href="#table/4">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <strong>Játékosok száma 3/6</strong>
-            <br>
-            <strong>Minimum limit: 200</strong>
-            <br>
-            <strong>Aktuális vak : 1000</strong>
+      <div class="col-md-4" *ngFor="let table of tables">
+        <a class="result-item" href="#table/1">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <strong>Játékosok száma {{table.users.length}}/6</strong>
+              <br>
+              <strong>Minimum limit: {{table.minBid}}</strong>
+              <br>
+              <strong>Aktuális vak : {{table.actualBid}}</strong>
+
+            </div>
           </div>
-        </div>
-      </a>
-    </div>
+        </a>
+      </div>
+
+
+
+
+
   </div>
   <div class="text-center">
     <ul class="pagination">

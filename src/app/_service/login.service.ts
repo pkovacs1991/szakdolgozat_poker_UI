@@ -6,6 +6,10 @@ import 'rxjs/add/operator/catch';
 import {User} from '../_models/user';
 import {Router} from '@angular/router';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class LoginService {
   // headers = new Headers({
@@ -19,15 +23,12 @@ export class LoginService {
   }
 
    login(user: User): Observable<any> {
-    const headers      = new HttpHeaders({ 'Content-Type': 'application/json' });
-    console.log('login');
-    return this.http.post('http://localhost:3000/api/v1/auth/login', JSON.stringify(user), { headers: headers })
-      .map((data: HttpResponse<any>) => data)
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    return this.http.post<any>('http://localhost:3000/api/v1/auth/login', user, httpOptions);
    }
 
   logout() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
     this.loggedInUser.emit( null);
   }
 }

@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { LoginService } from './login-service.service';
+import { LoginService } from './login.service';
 
-describe('LoginServiceService', () => {
+describe('LoginServic', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [LoginService]

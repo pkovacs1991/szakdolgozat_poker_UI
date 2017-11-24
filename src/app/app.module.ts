@@ -12,11 +12,11 @@ import { TablesComponent } from './tables/tables.component';
 import { TableComponent } from './table/table.component';
 import {HttpClientModule} from '@angular/common/http';
 import {MockBackend} from '@angular/http/testing';
-import {FakeBackEndProvider} from './_helpers/fake-backend.provider';
-import {LoginService} from './_service/login-service.service';
+import {LoginService} from './_service/login.service';
 import {FormsModule} from '@angular/forms';
 import {AuthGuard} from './_guards/AuthGuard';
-import {RegisterService} from './_service/register-service.service';
+import {RegisterService} from './_service/register.service';
+import {TableService} from './_service/table.service';
 
 
 const appRoutes: Routes = [
@@ -55,7 +55,7 @@ const appRoutes: Routes = [
   providers: [
     LoginService,
     RegisterService,
-    FakeBackEndProvider,
+    TableService,
     MockBackend,
     AuthGuard
   ],
