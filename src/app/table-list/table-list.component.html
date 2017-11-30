@@ -17,22 +17,31 @@
       </div>
     </div>
   </form>
-  <h2>Találatok ({{tables.length}})</h2>
-  <div class="row" >
 
-      <div class="col-md-4" *ngFor="let table of tables">
-        <a class="result-item" href="#table/1">
-          <div class="panel panel-default">
-            <div class="panel-body">
+  <div *ngIf="tables && tables.length > 0"  class="row" >
+
+      <div class="panel-body col-md-4" *ngFor="let table of tables">
+        <div class="panel panel-default">
+          <a class="result-item"[routerLink]="['/table', table.id ]">
+            <div class="panel-body col-md-9">
+              <strong>Asztal neve: {{table.name}}</strong>
+              <br>
               <strong>Játékosok száma {{table.users.length}}/6</strong>
               <br>
               <strong>Minimum limit: {{table.minBid}}</strong>
               <br>
+              <strong>Maximum limit {{table.maxBid}}</strong>
+              <br>
               <strong>Aktuális vak : {{table.actualBid}}</strong>
 
             </div>
+          </a>
+
+            <div class="panel-body col-md-3">
+              <a mat-icon-button [routerLink]="['/table', 'edit', table.id ]"><mat-icon>edit</mat-icon></a>
+              <a mat-icon-button (click)="this.deleteTable(table.id)"><mat-icon>delete</mat-icon></a>
+            </div>
           </div>
-        </a>
       </div>
 
 
@@ -40,12 +49,7 @@
 
 
   </div>
-  <div class="text-center">
-    <ul class="pagination">
-      <li class="active">
-        <a href="">1</a>
-      </li>
-      <li><a href="">2</a></li>
-    </ul>
-  </div>
+  <a mat-raised-button color="primary" [routerLink]="['/table', 'new']"><mat-icon>add</mat-icon>Új asztal létrehozása</a>
+
+
 </div>

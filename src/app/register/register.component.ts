@@ -18,19 +18,18 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.user = new User();
 
   }
 
-  register() {
-    this.registerService.register(this.user).subscribe(
+  async onFormSubmit(user: User) {
+    console.log(user);
+    this.registerService.register(user).subscribe(
       (data) => {console.log(data);
         this.router.navigate(['login']);
       },
       err => console.log('ERROR!!!')
     );
-
-
   }
 
 }

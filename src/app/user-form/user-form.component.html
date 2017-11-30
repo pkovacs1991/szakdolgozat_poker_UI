@@ -1,0 +1,85 @@
+
+<form (submit)="submit(userForm)" #userForm="ngForm">
+
+  <div class="form-group">
+    <mat-form-field>
+      <input
+        name="username"
+        [(ngModel)]="model.username"
+        matInput type="text"
+        placeholder="Felhasználó neve"
+        required
+        #username="ngModel">
+      <mat-error *ngIf="username.invalid && (username.dirty || username.touched) && username.errors.required">
+        Szükséges egy felhasználó név!
+      </mat-error>
+
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input
+        name="password"
+        [(ngModel)]="model.password"
+        matInput type="password"
+        placeholder="Jelszó"
+        required
+        #password="ngModel">
+      <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
+        Szükséges egy jelszót megadni!
+      </mat-error>
+
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input
+        name="email"
+        [(ngModel)]="model.email"
+        matInput type="text"
+        placeholder="E-mail cím"
+        required
+        #email="ngModel">
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.required">
+        Szükséges egy E-mail cím!
+      </mat-error>
+
+    </mat-form-field>
+
+    <br>
+    <mat-form-field>
+      <input
+        name="firstName"
+        [(ngModel)]="model.firstName"
+        matInput type="text"
+        placeholder="Kereszt név"
+        required
+        #firstName="ngModel">
+      <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.touched) && firstName.errors.required">
+        Szükséges egy Kereszt név!
+      </mat-error>
+
+    </mat-form-field>
+
+
+    <br>
+    <mat-form-field>
+      <input
+        name="lastName"
+        [(ngModel)]="model.lastName"
+        matInput type="text"
+        placeholder="Vezeték név"
+        required
+        #lastName="ngModel">
+      <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.touched) && lastName.errors.required">
+        Szükséges egy Vezeték név!
+      </mat-error>
+
+    </mat-form-field>
+
+
+  </div>
+
+  <button [disabled]="!userForm.valid" type="submit" mat-raised-button color="primary">
+    <span *ngIf="user.id > 0; else elseBlock">Módosítás</span>
+    <ng-template #elseBlock>Regisztráció</ng-template>
+    </button>
+</form>

@@ -1,0 +1,58 @@
+<div class="app-container">
+  <h1>Felhasználók böngészése</h1>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+      </ng-container>
+
+      <!-- UserName Column -->
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef> Felhasználó név </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Név </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.firstName}} {{user.lastName}} </mat-cell>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> E-mail cím </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="balance">
+        <mat-header-cell *matHeaderCellDef> Penz </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.balance}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> Szerkesztés </mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <a mat-icon-button [routerLink]="['/user', 'edit', user.id ]"><mat-icon>edit</mat-icon></a>
+          <a mat-icon-button (click)="this.deleteUser(user.id)"><mat-icon>delete</mat-icon></a>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+  <a mat-raised-button color="primary" [routerLink]="['/table', 'new']"><mat-icon>add</mat-icon>Új asztal létrehozása</a>
+
+
+</div>

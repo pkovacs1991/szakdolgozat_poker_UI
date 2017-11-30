@@ -1,22 +1,15 @@
-<nav class="navbar navbar-inverse navbar-fixed-top menu" xmlns="http://www.w3.org/1999/html">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-              aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#/">Online póker</a>
-    </div>
-    <div id="navbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
-          <li *ngIf="!this.user"><a href="#login">Belépés</a></li>
-          <li *ngIf="!this.user"><a href="#register">Regisztráció</a></li>
-          <li *ngIf="this.user"><a href="#profile" >Profil</a></li>
-          <li *ngIf="this.user"><a href="#" (click)="logout()">Kijelentkezés</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<mat-toolbar color="primary">
+  <button mat-button routerLink="/">
+    Online póker
+  </button>
+  <button mat-button routerLink="/tables">Asztalok</button>
+  <button mat-button routerLink="/users">Felhasználók</button>
+
+
+  <span class="fill-remaining-space"></span>
+  <button *ngIf="!this.user" mat-button routerLink="/login">Belépés</button>
+  <button *ngIf="!this.user" mat-button routerLink="/register">Regisztráció</button>
+  <button *ngIf="this.user" mat-button routerLink="/profile">Profil</button>
+  <button *ngIf="this.user" mat-button (click)="this.logout()">Kijelentkezés</button>
+
+</mat-toolbar>

@@ -1,0 +1,59 @@
+<br>
+<h1 class="display-2">Új póker asztal</h1>
+<hr>
+<br>
+<form (submit)="submit(tableForm)" #tableForm="ngForm">
+
+  <div class="form-group">
+    <mat-form-field>
+      <input
+        name="name"
+        [(ngModel)]="model.name"
+        matInput type="text"
+        placeholder="Asztal neve"
+        required
+        #name="ngModel">
+      <mat-error *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.required">
+        Szükséges egy asztal név!
+      </mat-error>
+      <!--<mat-error *ngIf="location.invalid && (location.dirty || location.touched) && location.errors.pattern">
+        Location must start with PC...!
+      </mat-error>-->
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input
+        name="minBid"
+        [(ngModel)]="model.minBid"
+        matInput type="text"
+        placeholder="Minimális limit"
+        required
+        #minBid="ngModel">
+      <mat-error *ngIf="minBid.invalid && (minBid.dirty || minBid.touched) && minBid.errors.required">
+        Szükséges egy minimális limit!
+      </mat-error>
+      <!--<mat-error *ngIf="location.invalid && (location.dirty || location.touched) && location.errors.pattern">
+        Location must start with PC...!
+      </mat-error>-->
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input
+        name="maxBid"
+        [(ngModel)]="model.maxBid"
+        matInput type="text"
+        placeholder="Maximális limit"
+        required
+        #maxBid="ngModel">
+      <mat-error *ngIf="maxBid.invalid && (maxBid.dirty || maxBid.touched) && maxBid.errors.required">
+        Szükséges egy maximális limit!
+      </mat-error>
+      <!--<mat-error *ngIf="location.invalid && (location.dirty || location.touched) && location.errors.pattern">
+        Location must start with PC...!
+      </mat-error>-->
+    </mat-form-field>
+
+  </div>
+
+  <button [disabled]="!tableForm.valid" type="submit" mat-raised-button color="primary">Asztal mentése</button>
+</form>

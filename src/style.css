@@ -6,7 +6,7 @@
   margin-bottom: 20px;
 }
 
-.result-item .panel {
+.panel {
   background: #f8f5f0;
   color: #444;
 }
@@ -15,7 +15,7 @@
   text-decoration: none;
 }
 
-.result-item .panel:hover {
+.panel:hover {
   background: #dfd7ca;
 }
 
