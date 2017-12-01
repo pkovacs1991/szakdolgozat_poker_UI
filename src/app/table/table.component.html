@@ -60,26 +60,10 @@
 
 
     <div class="board">
-      <div class="cards">
-        <div class="card-small">
-          <p class="card-text black">A</p>
-          <p class="card-img black">&clubs;</p>
-        </div>
-        <div class="card-small">
-          <p class="card-text black">10</p>
-          <p class="card-img black">&spades;</p>
-        </div>
-        <div class="card-small">
-          <p class="card-text red">K</p>
-          <p class="card-img red">&hearts;</p>
-        </div>
-        <div class="card-small">
-          <p class="card-text red">Q</p>
-          <p class="card-img red">&diams;</p>
-        </div>
-        <div class="card-small">
-          <p class="card-text red">2</p>
-          <p class="card-img red">&diams;</p>
+      <div *ngIf="this.tableStatus.tableCards" class="cards">
+        <div *ngFor="let card of this.tableStatus.tableCards" class="card-small">
+          <p class="card-text {{card.htmlColor}}">{{card.number}}</p>
+          <p class="card-img {{card.htmlColor}}">{{card.htmlFigure}}</p>
         </div>
       </div>
       <div class="bet">
@@ -93,30 +77,32 @@
         <p>Pénzem: {{this.user.balance}}</p>
         <p *ngIf="this.tableStatus.table">Aktuális vak: {{this.tableStatus.table.minBid * 2}}</p>
         <p>Aktuális emelés: {{this.tableStatus.currentBet}}</p>
+        <p>Aktuális tétem: {{this.userBet}}</p>
       </div>
-      <div class="my-cards">
+      <div class="my-cards" *ngIf="this.hand.length > 0">
 
         <p>Kártyáim</p>
         <div class="card-mine">
-          <p class="card-text red">A</p>
-          <p class="card-img red">&diams;</p>
+          <p class="card-text {{this.hand[0].htmlColor}}">{{this.hand[0].number}}</p>
+          <p class="card-img {{this.hand[0].htmlColor}}">{{this.hand[0].htmlFigure}}</p>
 
         </div>
         <div class="card-mine">
-          <p class="card-text red">A</p>
-          <p class="card-img red">&spades;</p>
+          <p class="card-text {{this.hand[1].htmlColor}}">{{this.hand[1].number}}</p>
+          <p class="card-img {{this.hand[1].htmlColor}}">{{this.hand[1].htmlFigure}}</p>
         </div>
       </div>
     </div>
     <div class="my-options">
       <p>Lehetőségek:</p>
-      <div class="option"><button [disabled]="!this.myTurn()" type="submit" (click)="check()" class="btn btn-success">Check</button></div>
-      <div class="option"><button [disabled]="!this.myTurn()" type="submit" class="btn btn-success">Bedob</button></div>
-      <div class="option">
+      <div *ngIf="this.myTurn() && this.userBet >= this.tableStatus.currentBet" class="option"><button type="submit" (click)="check()" class="btn btn-success">Check</button></div>
+      <div *ngIf="this.myTurn() && this.userBet < this.tableStatus.currentBet" class="option"><button type="submit" (click)="call()" class="btn btn-success">Tart</button> {{this.tableStatus.currentBet - this.userBet}} pénzzel</div>
+      <div *ngIf="this.myTurn()" class="option"><button type="submit" (click)="fold()" class="btn btn-success">Bedob</button></div>
+      <div *ngIf="this.myTurn()"  class="option">
         <input type="text" [disabled]="!this.myTurn()" class="form-control raise" id="raise" name="raise" placeholder="100">
-        <button [disabled]="!this.myTurn()" type="submit" class="btn btn-success">Emel</button>
+        <button [disabled]="!this.myTurn()" type="submit" (click)="raise()" class="btn btn-success">Emel</button>
       </div>
-      <div class="option"><button [disabled]="!this.myTurn()" type="submit" class="btn btn-success">All in</button></div>
+      <div *ngIf="this.myTurn()"  class="option"><button [disabled]="!this.myTurn()" type="submit" (click)="allIn()"  class="btn btn-success">All in</button></div>
 
 
 

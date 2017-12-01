@@ -1,5 +1,6 @@
 import {User} from "./user";
 import {PokerTable} from "./pokertable";
+import {Card} from "./card";
 
 export class TableStatus {
 
@@ -10,4 +11,5 @@ export class TableStatus {
   turn: User;
   users: User[] = [];
   table: PokerTable;
+  tableCards: Card[];
 }

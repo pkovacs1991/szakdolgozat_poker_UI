@@ -30,6 +30,7 @@ import {UserService} from './_service/user.service';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import {SocketService} from './_service/socket.service';
+import {CardService} from "./_service/card.service";
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
     TableService,
     UserService,
     SocketService,
+    CardService,
     MockBackend,
     AuthGuard
   ],
