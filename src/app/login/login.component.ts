@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.user).subscribe(
       (data) => {
         console.log(data);
-        localStorage.setItem('currentUser', data.user.username);
+        this.loginService.loggedInUser.emit(data.user);
+        localStorage.setItem('currentUser', JSON.stringify(data.user));
         localStorage.setItem('currentUserId', data.user.id);
         localStorage.setItem('token', data.token);
         console.log(localStorage.getItem('currentUser'));
-        this.loginService.loggedInUser.emit(data);
       },
       err => console.log('ERROR!!!'),
       () => {

@@ -17,6 +17,10 @@ export class SocketService {
     this.socket.emit('message', message);
   }
 
+  public send(message: Message): void {
+    this.socket.emit('message', message);
+  }
+
   public onMessage(): Observable<any> {
     return new Observable(observer => {
       this.socket.on('message', (data) => {

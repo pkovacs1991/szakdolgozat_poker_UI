@@ -10,6 +10,8 @@ import 'rxjs/add/observable/of';
 import {TableStatus} from '../_models/tablestatus';
 import {Card} from '../_models/card';
 import {CardService} from "../_service/card.service";
+import {ActivatedRoute, ParamMap} from "@angular/router";
+import "rxjs/add/operator/switchMap";
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -23,12 +25,29 @@ export class TableComponent implements OnInit {
   tableStatus = new TableStatus();
   hand: Card[] = [];
   userBet: number;
+  amount: number;
+  possibleRaiseAction: string[] = [];
+  tableId;
+
 
   constructor(private socketService: SocketService,
               private userService: UserService,
-              private cardService: CardService) { }
+              private cardService: CardService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        const id = params.get('id');
+        console.log(id);
+        if ( id !== null) {
+          this.tableId = id;
+        }
+        console.log(this.user);
+        return Observable.of({});
+      })
+      .subscribe();
+
     this.initModel().subscribe( next => {
       // Using timeout due to https://github.com/angular/angular/issues/14748
       setTimeout(() => {
@@ -64,6 +83,8 @@ export class TableComponent implements OnInit {
           this.tableStatus.table = content.table;
           this.tableStatus.currentBet = content.currentBet;
           this.tableStatus.tableCards = this.getTableCards(content.tableCards);
+          this.getPossibleRaiseActions(content.possibleRaiseActions);
+          this.userService.getCurrentUser().subscribe( (user) => this.user = user);
           this.getUserHand(content.hand);
           this.getUserBet(content.userBets);
           console.log(message);
@@ -83,23 +104,23 @@ export class TableComponent implements OnInit {
   }
 
   check() {
-    // this.sendMessage(JSON.stringify({action: Action.CHECK}));
+    this.sendMessage(JSON.stringify({action: Action.CHECK, table: this.tableId}));
   }
 
   call() {
-    // this.sendMessage(JSON.stringify({action: Action.CALL}));
+    this.sendMessage(JSON.stringify({action: Action.CALL, table: this.tableId}));
   }
 
   fold() {
-    this.sendMessage(JSON.stringify({action: Action.FOLD}));
+    this.sendMessage(JSON.stringify({action: Action.FOLD, table: this.tableId}));
   }
 
   raise() {
-    // this.sendMessage(JSON.stringify({action: Action.RAISE}));
+    this.sendMessage(JSON.stringify({action: Action.RAISE, amount: this.amount, table: this.tableId}));
   }
 
   allIn() {
-    // this.sendMessage(JSON.stringify({action: Action.ALL_IN}));
+    this.sendMessage(JSON.stringify({action: Action.RAISE, amount: this.user.balance, table: this.tableId}));
   }
 
   public sendMessage(message: string): void {
@@ -118,7 +139,8 @@ export class TableComponent implements OnInit {
 
     if (action === Action.JOINED) {
       message = {
-        action: action
+        action: action,
+        table: this.tableId
       };
     }
     this.sendMessage(JSON.stringify(message));
@@ -182,5 +204,27 @@ export class TableComponent implements OnInit {
     console.log('aaaaaaaaaa', newTableCards);
     return newTableCards;
   }
+
+  getPossibleRaiseActions(possibleRaiseActions) {
+    this.possibleRaiseAction = [];
+    for (let i = 0; i < possibleRaiseActions.length; i++) {
+      if (possibleRaiseActions[i].user.id = this.user.id) {
+        console.log(possibleRaiseActions[i]);
+        this.possibleRaiseAction = this.possibleRaiseAction.concat(possibleRaiseActions[i].actions);
+      }
+    }
+    console.log('aacccttion', this.possibleRaiseAction);
+  }
+
+  canRaise(): boolean {
+    console.log(this.possibleRaiseAction);
+    for (let i = 0; i < this.possibleRaiseAction.length; i++) {
+      if (this.possibleRaiseAction[i] === 'RAISE') {
+        return true;
+      }
+    }
+    return false;
+  }
+
 
 }

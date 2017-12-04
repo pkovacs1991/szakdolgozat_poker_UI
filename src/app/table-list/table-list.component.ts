@@ -1,6 +1,8 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {TableService} from '../_service/table.service';
 import {PokerTable} from "../_models/pokertable";
+import {MenuComponent} from "../menu/menu.component";
+import {User} from "../_models/user";
 
 @Component({
   selector: 'app-table-list',
@@ -10,11 +12,11 @@ import {PokerTable} from "../_models/pokertable";
 export class TableListComponent implements OnInit  {
 
   tables: PokerTable[] = [];
-
+  user: User;
   constructor(private tableService: TableService) { }
 
   ngOnInit() {
-
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.tableService.getTables().subscribe(tables => {
       this.tables = tables;
       console.log('init', tables);
@@ -22,6 +24,7 @@ export class TableListComponent implements OnInit  {
     }, (error) => {
       console.log('error', error);
     });
+
   }
 
 

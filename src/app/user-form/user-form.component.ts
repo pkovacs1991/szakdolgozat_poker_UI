@@ -10,12 +10,16 @@ export class UserFormComponent implements OnChanges {
 
   @Input() user: User;
   model: User = null;
+  loggedInUser: User;
   @Output() onSubmit = new EventEmitter<User>();
 
-  constructor() { }
+  constructor() {
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngOnChanges() {
     this.model = Object.assign({}, this.user);
+    console.log(this.model);
   }
 
   submit(form) {

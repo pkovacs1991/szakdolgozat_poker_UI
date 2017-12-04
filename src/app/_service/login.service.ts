@@ -17,7 +17,7 @@ export class LoginService {
   //   'Content-Type': 'application/json'
   // });
 
-  @Output() loggedInUser: EventEmitter<any> = new EventEmitter();
+  @Output() loggedInUser: EventEmitter<User> = new EventEmitter();
   constructor(private http: HttpClient, private router: Router) {
 
 

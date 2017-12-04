@@ -31,17 +31,18 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import {SocketService} from './_service/socket.service';
 import {CardService} from "./_service/card.service";
+import {AdminGuard} from "./_guards/AdminGuard";
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'tables', component: TableListComponent, canActivate: [AuthGuard]  },
-  { path: 'table/new', component: PokerEditComponent, canActivate: [AuthGuard]  },
-  { path: 'table/edit/:id', component: PokerEditComponent, canActivate: [AuthGuard]  },
+  { path: 'table/new', component: PokerEditComponent, canActivate: [AuthGuard, AdminGuard]  },
+  { path: 'table/edit/:id', component: PokerEditComponent, canActivate: [AuthGuard, AdminGuard]  },
   { path: 'table/:id', component: TableComponent, canActivate: [AuthGuard]  },
   { path: 'profile', component: UserEditComponent, canActivate: [AuthGuard]  },
   { path: 'user/edit/:id', component: UserEditComponent, canActivate: [AuthGuard]  },
-  { path: 'users', component: UserListComponent, canActivate: [AuthGuard]  },
+  { path: 'users', component: UserListComponent, canActivate: [AuthGuard, AdminGuard]  },
   { path: '',
     redirectTo: 'login',
     pathMatch: 'full'
@@ -88,7 +89,8 @@ const appRoutes: Routes = [
     SocketService,
     CardService,
     MockBackend,
-    AuthGuard
+    AuthGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

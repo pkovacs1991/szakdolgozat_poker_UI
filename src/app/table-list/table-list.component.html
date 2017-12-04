@@ -37,7 +37,7 @@
             </div>
           </a>
 
-            <div class="panel-body col-md-3">
+            <div *ngIf="this.user.isAdmin" class="panel-body col-md-3">
               <a mat-icon-button [routerLink]="['/table', 'edit', table.id ]"><mat-icon>edit</mat-icon></a>
               <a mat-icon-button (click)="this.deleteTable(table.id)"><mat-icon>delete</mat-icon></a>
             </div>
@@ -49,7 +49,7 @@
 
 
   </div>
-  <a mat-raised-button color="primary" [routerLink]="['/table', 'new']"><mat-icon>add</mat-icon>Új asztal létrehozása</a>
+  <a *ngIf="this.user.isAdmin" mat-raised-button color="primary" [routerLink]="['/table', 'new']"><mat-icon>add</mat-icon>Új asztal létrehozása</a>
 
 
 </div>
