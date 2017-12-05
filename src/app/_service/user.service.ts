@@ -40,4 +40,8 @@ export class UserService {
     return this.http.post<User>('http://localhost:3000/api/v1/register', user,  this.httpOptions);
   }
 
+  resetBalance() {
+    return this.http.get<any>('http://localhost:3000/api/v1/user/resetBalance',  this.httpOptions);
+  }
+
 }

@@ -13,9 +13,6 @@ export class SocketService {
     this.socket = socketIo(SERVER_URL);
   }
 
-  public send(message: Message): void {
-    this.socket.emit('message', message);
-  }
 
   public send(message: Message): void {
     this.socket.emit('message', message);

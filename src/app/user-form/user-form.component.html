@@ -76,19 +76,23 @@
       <br>
 
 
-    <mat-form-field *ngIf="this.loggedInUser.isAdmin">
+    <mat-form-field >
       <input
         name="balance"
         [(ngModel)]="model.balance"
         matInput type="text"
         placeholder="Felhasználó pénze"
         required
+        [disabled]="!this.loggedInUser.isAdmin"
         #balance="ngModel">
       <mat-error *ngIf="balance.invalid && (balance.dirty || balance.touched) && balance.errors.required">
         Szükséges megadni a felhasználó pénzét!
       </mat-error>
 
     </mat-form-field>
+    <button *ngIf="model.balance < 500" type="button" mat-raised-button color="primary" (click)="resetBalance()">
+      Újratöltés 500-ra
+    </button>
     <br>
 
     <mat-form-field *ngIf="this.loggedInUser.isAdmin">

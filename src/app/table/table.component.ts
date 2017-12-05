@@ -135,7 +135,7 @@ export class TableComponent implements OnInit {
   }
 
   public sendNotification( action: Action): void {
-    let message: Message;
+    let message: any;
 
     if (action === Action.JOINED) {
       message = {
