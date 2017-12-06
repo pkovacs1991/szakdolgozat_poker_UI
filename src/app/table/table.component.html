@@ -71,6 +71,10 @@
       </div>
     </div>
   </div>
+  <div #list class="message-box" [scrollTop]="list.scrollHeight">
+    <div *ngFor="let message of messages" role="listitem">{{message}}</div>
+  </div>
+
   <div *ngIf="this.user" class="my-tools">
     <div class="informations">
       <div class="information">
@@ -93,6 +97,7 @@
         </div>
       </div>
     </div>
+
     <div class="my-options">
       <p>Lehetőségek:</p>
       <div *ngIf="this.myTurn() && this.userBet >= this.tableStatus.currentBet" class="option"><button type="submit" (click)="check()" class="btn btn-success">Check</button></div>

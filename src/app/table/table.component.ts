@@ -12,6 +12,7 @@ import {Card} from '../_models/card';
 import {CardService} from "../_service/card.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import "rxjs/add/operator/switchMap";
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -28,6 +29,7 @@ export class TableComponent implements OnInit {
   amount: number;
   possibleRaiseAction: string[] = [];
   tableId;
+  messages: string[] = [];
 
 
   constructor(private socketService: SocketService,
@@ -73,7 +75,16 @@ export class TableComponent implements OnInit {
         const content = JSON.parse(message.content);
         console.log(content.status);
         if (content.winner) {
-          console.log('won the game yay', content.winner);
+          console.log(content);
+          let winMessage = 'A játékot ' + message.from.username + ' nyerte';
+
+          if (content.winner[0].rank === 'mindenki bedobta' ) {
+            winMessage += ', mert ' + content.winner[0].rank  ;
+          } else {
+            winMessage += ' ' + content.winner[0].rank + ' volt a kezében.' ;
+          }
+          this.messages = [...this.messages, winMessage];
+          console.log('won the game', content.winner);
         } else if (content.users) {
           this.tableStatus.users = content.users;
           this.tableStatus.pot = content.pot;
@@ -87,8 +98,11 @@ export class TableComponent implements OnInit {
           this.userService.getCurrentUser().subscribe( (user) => this.user = user);
           this.getUserHand(content.hand);
           this.getUserBet(content.userBets);
-          console.log(message);
         } else {
+        }
+
+        if (content.message) {
+          this.messages = [...this.messages, content.message];
         }
       });
 
@@ -176,7 +190,6 @@ export class TableComponent implements OnInit {
         this.hand.push(card2);
       }
     }
-    console.log('aaaaaaaaaa', this.hand);
   }
 
   getUserBet(bets ) {
@@ -185,8 +198,6 @@ export class TableComponent implements OnInit {
         this.userBet = bets[i].bet;
       }
     }
-    console.log('betttttt', this.userBet);
-    console.log('currrbetttttt', this.tableStatus.currentBet);
   }
 
   getTableCards(tableCards ) {
@@ -201,7 +212,6 @@ export class TableComponent implements OnInit {
         newTableCards.push(card);
       }
     }
-    console.log('aaaaaaaaaa', newTableCards);
     return newTableCards;
   }
 
@@ -209,15 +219,12 @@ export class TableComponent implements OnInit {
     this.possibleRaiseAction = [];
     for (let i = 0; i < possibleRaiseActions.length; i++) {
       if (possibleRaiseActions[i].user.id = this.user.id) {
-        console.log(possibleRaiseActions[i]);
         this.possibleRaiseAction = this.possibleRaiseAction.concat(possibleRaiseActions[i].actions);
       }
     }
-    console.log('aacccttion', this.possibleRaiseAction);
   }
 
   canRaise(): boolean {
-    console.log(this.possibleRaiseAction);
     for (let i = 0; i < this.possibleRaiseAction.length; i++) {
       if (this.possibleRaiseAction[i] === 'RAISE') {
         return true;

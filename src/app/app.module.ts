@@ -19,7 +19,7 @@ import {RegisterService} from './_service/register.service';
 import {TableService} from './_service/table.service';
 import {
   MatToolbarModule, MatButtonModule, MatMenuModule, MatIconModule,
-  MatFormFieldModule, MatInputModule, MatSelectModule,
+  MatFormFieldModule, MatInputModule, MatSelectModule, MatListModule,
   MatButtonToggleModule, MatTableDataSource, MatPaginator, MatPaginatorModule, MatTableModule
 } from '@angular/material';
 import { PokerFormComponent } from './poker-form/poker-form.component';
@@ -77,9 +77,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     MatToolbarModule, MatButtonModule, MatMenuModule, MatIconModule,
-    MatFormFieldModule, MatInputModule, MatSelectModule,
-    MatPaginatorModule, MatTableModule,
-    MatButtonToggleModule
+    MatFormFieldModule, MatInputModule, MatSelectModule, MatListModule,
+    MatPaginatorModule, MatTableModule, MatButtonToggleModule
   ],
   providers: [
     LoginService,

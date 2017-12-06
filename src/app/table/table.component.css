@@ -1,0 +1,17 @@
+.message-box {
+  display: inline-block;
+  border: solid black;
+  width: 300px;
+  font-size: 14px;
+  margin-top: 125px;
+  height: 165px;
+  margin-left: 10px;
+  overflow-y: scroll;
+  scroll: auto;
+}
+
+.list{height: 200px; overflow-y: scroll;}
+.message-box mat-list-item {
+  height: 16px;
+  font-size: 12px
+}
