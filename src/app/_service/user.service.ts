@@ -17,37 +17,37 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    this.httpOptions.headers = this.httpOptions.headers.append('token', localStorage.getItem('token'));
+    this.httpOptions.headers = this.httpOptions.headers.set('token', localStorage.getItem('token'));
     return this.http.get<User[]>('http://localhost:3000/api/v1/user', this.httpOptions);
   }
 
   deleteUser(id: number) {
-    this.httpOptions.headers = this.httpOptions.headers.append('token', localStorage.getItem('token'));
+    this.httpOptions.headers = this.httpOptions.headers.set('token', localStorage.getItem('token'));
     return this.http.delete<string>('http://localhost:3000/api/v1/user/' + id, this.httpOptions);
   }
 
   getUser(id: number): Observable<User> {
-    this.httpOptions.headers = this.httpOptions.headers.append('token', localStorage.getItem('token'));
+    this.httpOptions.headers = this.httpOptions.headers.set('token', localStorage.getItem('token'));
     return this.http.get<User>('http://localhost:3000/api/v1/user/' + id,  this.httpOptions);
   }
 
   getCurrentUser(): Observable<User> {
-    this.httpOptions.headers = this.httpOptions.headers.append('token', localStorage.getItem('token'));
+    this.httpOptions.headers = this.httpOptions.headers.set('token', localStorage.getItem('token'));
     return this.http.get<User>('http://localhost:3000/api/v1/auth/currentUser' ,  this.httpOptions);
   }
 
   updateUser(id: number, user: User) {
-    this.httpOptions.headers = this.httpOptions.headers.append('token', localStorage.getItem('token'));
+    this.httpOptions.headers = this.httpOptions.headers.set('token', localStorage.getItem('token'));
     return this.http.put<User>('http://localhost:3000/api/v1/user/' + id, user, this.httpOptions);
   }
 
   addUser(user: User) {
-    this.httpOptions.headers = this.httpOptions.headers.append('token', localStorage.getItem('token'));
+    this.httpOptions.headers = this.httpOptions.headers.set('token', localStorage.getItem('token'));
     return this.http.post<User>('http://localhost:3000/api/v1/register', user,  this.httpOptions);
   }
 
   resetBalance() {
-    this.httpOptions.headers = this.httpOptions.headers.append('token', localStorage.getItem('token'));
+    this.httpOptions.headers = this.httpOptions.headers.set('token', localStorage.getItem('token'));
     return this.http.get<any>('http://localhost:3000/api/v1/user/resetBalance',  this.httpOptions);
   }
 
