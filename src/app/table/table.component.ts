@@ -45,7 +45,7 @@ export class TableComponent implements OnInit {
         if ( id !== null) {
           this.tableId = id;
         }
-        console.log(this.user);
+
         return Observable.of({});
       })
       .subscribe();
@@ -193,9 +193,11 @@ export class TableComponent implements OnInit {
   }
 
   getUserBet(bets ) {
-    for (let i = 0; i < bets.length; i++) {
-      if (bets[i].user.id === this.user.id) {
-        this.userBet = bets[i].bet;
+    if (bets) {
+      for (let i = 0; i < bets.length; i++) {
+        if (bets[i].user.id === this.user.id) {
+          this.userBet = bets[i].bet;
+        }
       }
     }
   }
