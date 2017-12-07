@@ -2,7 +2,7 @@
   <button mat-button routerLink="/">
     Online póker
   </button>
-  <button mat-button routerLink="/tables">Asztalok</button>
+  <button *ngIf="this.user" mat-button routerLink="/tables">Asztalok</button>
   <button *ngIf="this.user && this.user.isAdmin" mat-button routerLink="/users">Felhasználók</button>
 
 
@@ -10,6 +10,6 @@
   <button *ngIf="!this.user" mat-button routerLink="/login">Belépés</button>
   <button *ngIf="!this.user" mat-button routerLink="/register">Regisztráció</button>
   <button *ngIf="this.user" mat-button routerLink="/profile">Profil</button>
-  <button  mat-button (click)="this.logout()">Kijelentkezés</button>
+  <button *ngIf="this.user"  mat-button (click)="this.logout()">Kijelentkezés</button>
 
 </mat-toolbar>

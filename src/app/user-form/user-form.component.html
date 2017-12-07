@@ -76,7 +76,7 @@
       <br>
 
 
-    <mat-form-field >
+    <mat-form-field *ngIf="this.loggedInUser" >
       <input
         name="balance"
         [(ngModel)]="model.balance"
@@ -95,7 +95,7 @@
     </button>
     <br>
 
-    <mat-form-field *ngIf="this.loggedInUser.isAdmin">
+    <mat-form-field *ngIf="this.loggedInUser?.isAdmin">
       <mat-select [(value)]="model.isAdmin">
         <mat-option [value]="true">Admin</mat-option>
         <mat-option [value]="false">Felhasználó</mat-option>

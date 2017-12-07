@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
+
     this.loginService.loggedInUser.subscribe((user) => this.user = user);
 
   }
