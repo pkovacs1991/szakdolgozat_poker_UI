@@ -2,17 +2,18 @@
 <h1 class="display-2">Új póker asztal</h1>
 <hr>
 <br>
-<form (submit)="submit(tableForm)" #tableForm="ngForm">
+<form  (submit)="submit(tableForm)" #tableForm="ngForm">
 
-  <div class="form-group">
-    <mat-form-field>
+  <div class="form-group left">
+    <mat-form-field class="full-length">
       <input
         name="name"
         [(ngModel)]="model.name"
         matInput type="text"
         placeholder="Asztal neve"
         required
-        #name="ngModel">
+        #name="ngModel"
+        >
       <mat-error *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.required">
         Szükséges egy asztal név!
       </mat-error>
@@ -21,7 +22,7 @@
       </mat-error>-->
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field class="full-length">
       <input
         name="minBid"
         [(ngModel)]="model.minBid"
@@ -37,7 +38,7 @@
       </mat-error>-->
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field class="full-length ">
       <input
         name="maxBid"
         [(ngModel)]="model.maxBid"
@@ -55,5 +56,5 @@
 
   </div>
 
-  <button [disabled]="!tableForm.valid" type="submit" mat-raised-button color="primary">Asztal mentése</button>
+  <button [disabled]="!tableForm.valid" type="submit" mat-raised-button color="primary" class="left">Asztal mentése</button>
 </form>

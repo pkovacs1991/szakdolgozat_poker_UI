@@ -1,8 +1,8 @@
 
 <form *ngIf="model" (submit)="submit(userForm)" #userForm="ngForm">
 
-  <div class="form-group">
-    <mat-form-field>
+  <div class="form-group left">
+    <mat-form-field class="full-length">
       <input
         name="username"
         [(ngModel)]="model.username"
@@ -16,7 +16,7 @@
     </mat-form-field>
       <br>
 
-    <mat-form-field>
+    <mat-form-field class="full-length">
       <input
         name="password"
         [(ngModel)]="model.password"
@@ -30,7 +30,7 @@
     </mat-form-field>
       <br>
 
-    <mat-form-field>
+    <mat-form-field class="full-length">
       <input
         name="email"
         [(ngModel)]="model.email"
@@ -45,7 +45,7 @@
       <br>
 
 
-    <mat-form-field>
+    <mat-form-field class="full-length">
       <input
         name="firstName"
         [(ngModel)]="model.firstName"
@@ -61,7 +61,7 @@
 
 
 
-    <mat-form-field>
+    <mat-form-field class="full-length">
       <input
         name="lastName"
         [(ngModel)]="model.lastName"
@@ -76,7 +76,7 @@
       <br>
 
 
-    <mat-form-field *ngIf="this.loggedInUser" >
+    <mat-form-field *ngIf="this.loggedInUser"  class="full-length">
       <input
         name="balance"
         [(ngModel)]="model.balance"
@@ -95,7 +95,7 @@
     </button>
     <br>
 
-    <mat-form-field *ngIf="this.loggedInUser?.isAdmin">
+    <mat-form-field *ngIf="this.loggedInUser?.isAdmin" class="full-length">
       <mat-select [(value)]="model.isAdmin">
         <mat-option [value]="true">Admin</mat-option>
         <mat-option [value]="false">Felhasználó</mat-option>
@@ -107,7 +107,7 @@
       <br>
   </div>
 
-  <button [disabled]="!userForm.valid" type="submit" mat-raised-button color="primary">
+  <button [disabled]="!userForm.valid" type="submit" mat-raised-button color="primary" class="left">
     <span *ngIf="model.id > 0; else elseBlock">Módosítás</span>
     <ng-template #elseBlock>Regisztráció</ng-template>
     </button>
