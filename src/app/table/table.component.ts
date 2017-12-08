@@ -50,20 +50,16 @@ export class TableComponent implements OnInit {
       })
       .subscribe();
 
-    this.initModel().subscribe( next => {
-      // Using timeout due to https://github.com/angular/angular/issues/14748
-      setTimeout(() => {
-        this.initIoConnection();
-        this.sendNotification(Action.JOINED);
-      }, 0);
-    });
+    this.initModel();
+    setTimeout(() => {
+      this.initIoConnection();
+      this.sendNotification(Action.JOINED);
+    }, 0);
+
   }
 
   private initModel(): any {
-    return this.userService.getCurrentUser().map((user) => {
-      this.user = user;
-      return Observable.of();
-    });
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   private initIoConnection(): void {
@@ -219,9 +215,11 @@ export class TableComponent implements OnInit {
 
   getPossibleRaiseActions(possibleRaiseActions) {
     this.possibleRaiseAction = [];
-    for (let i = 0; i < possibleRaiseActions.length; i++) {
-      if (possibleRaiseActions[i].user.id = this.user.id) {
-        this.possibleRaiseAction = this.possibleRaiseAction.concat(possibleRaiseActions[i].actions);
+    if (this.possibleRaiseAction) {
+      for (let i = 0; i < possibleRaiseActions.length; i++) {
+        if (possibleRaiseActions[i].user.id = this.user.id) {
+          this.possibleRaiseAction = this.possibleRaiseAction.concat(possibleRaiseActions[i].actions);
+        }
       }
     }
   }
