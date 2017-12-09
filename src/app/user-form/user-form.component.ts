@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {User} from "../_models/user";
-import {UserService} from "../_service/user.service";
-import {Observable} from "rxjs/Observable";
+import {User} from '../_models/user';
+import {UserService} from '../_service/user.service';
+import {Observable} from 'rxjs/Observable';
+import {ErrorMessage} from '../_models/errormessage';
 
 @Component({
   selector: 'app-user-form',
@@ -13,6 +14,8 @@ export class UserFormComponent implements OnChanges {
   @Input() user: User;
   model: User = null;
   loggedInUser: User;
+  @Input() errors: ErrorMessage[];
+  @Input() success: boolean;
   @Output() onSubmit = new EventEmitter<User>();
 
   constructor(private userService: UserService) {
@@ -20,6 +23,7 @@ export class UserFormComponent implements OnChanges {
   }
 
   ngOnChanges() {
+    console.log(this.user);
     this.model = Object.assign({}, this.user);
     console.log(this.model);
   }

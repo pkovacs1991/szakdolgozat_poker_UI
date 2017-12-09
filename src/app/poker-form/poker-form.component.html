@@ -2,6 +2,8 @@
 <h1 class="display-2">Új póker asztal</h1>
 <hr>
 <br>
+<div *ngFor="let error of errors" class="alert alert-danger" role="alert">{{error.message}}</div>
+<div *ngIf="success" class="alert alert-success" role="alert">Sikeres módosítás</div>
 <form  (submit)="submit(tableForm)" #tableForm="ngForm">
 
   <div class="form-group left">

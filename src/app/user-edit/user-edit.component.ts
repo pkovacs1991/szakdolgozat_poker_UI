@@ -5,6 +5,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Observable} from 'rxjs';
 import { Location } from "@angular/common";
 import "rxjs/add/operator/switchMap";
+import {ErrorMessage} from "../_models/errormessage";
 
 @Component({
   selector: 'app-user-edit',
@@ -14,7 +15,8 @@ import "rxjs/add/operator/switchMap";
 export class UserEditComponent implements OnInit {
 
   user: User;
-
+  errorMessage: ErrorMessage[] = [];
+  success: boolean;
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -37,11 +39,19 @@ export class UserEditComponent implements OnInit {
       .subscribe();
   }
 
-  async onFormSubmit(user: User) {
-    console.log(user);
-      console.log('form', user);
-      await this.userService.updateUser(user.id, user).subscribe(message => this.location.back());
-      console.log('update');
+  onFormSubmit(user: User) {
+    this.user = user;
+      this.userService.updateUser(user.id, user).subscribe(message => {
+         console.log('success');
+         this.success = true;
+         this.errorMessage = [];
+        }
+      , (error) => {
+          this.success = false;
+          console.log(error);
+          this.errorMessage = error.error;
+        }
+      );
 
   }
 }

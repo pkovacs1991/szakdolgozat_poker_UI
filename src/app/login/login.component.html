@@ -2,30 +2,48 @@
 
   <h1>Belépés</h1>
 
-  <div class="alert alert-danger" role="alert">Sikertelen belépési kísérlet!</div>
+  <div *ngIf="this.error" class="alert alert-danger" role="alert">Sikertelen belépési kísérlet!</div>
 
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
 
-        <div class="form-group">
-          <label for="inputUser" class="col-sm-4 control-label">Felhasználó név</label>
-          <div class="col-sm-8">
-            <input class="form-control" id="inputUser"  [(ngModel)]="user.username" placeholder="Felhasználónév">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="inputPassword" class="col-sm-4 control-label">Jelszó</label>
-          <div class="col-sm-8">
-            <input type="password" class="form-control" id="inputPassword" [(ngModel)]="user.password" placeholder="Jelszó">
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-4 col-sm-8">
-            <button type="submit" class="btn btn-success" (click)="login()">Belépés</button>
-          </div>
-        </div>
+  <form  #userForm="ngForm">
+
+    <div class="form-group left">
+      <mat-form-field class="full-length">
+        <input
+          name="username"
+          [(ngModel)]="user.username"
+          matInput type="text"
+          placeholder="Felhasználó neve"
+          required
+          #username="ngModel">
+        <mat-error *ngIf="username.invalid && (username.dirty || username.touched) && username.errors.required">
+          Szükséges egy felhasználó név!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="full-length">
+        <input
+          name="password"
+          [(ngModel)]="user.password"
+          matInput type="password"
+          placeholder="Jelszó"
+          required
+          #password="ngModel">
+        <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
+          Szükséges egy jelszót megadni!
+        </mat-error>
+      </mat-form-field>
+      <br>
+
+
     </div>
-  </div>
+
+    <button [disabled]="!userForm.valid" type="submit" mat-raised-button color="primary" (click)="login()" class="left">
+      <span>Belépés</span>
+    </button>
+  </form>
+
 
 </div>
 

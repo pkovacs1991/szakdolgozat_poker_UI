@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {LoginService} from '../_service/login.service';
 import {User} from '../_models/user';
 import {Router} from '@angular/router';
+import {errorComparator} from "tslint/lib/verify/lintError";
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,10 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   user: User;
-
+  error: boolean = false;
   constructor(
       private loginService: LoginService, private router: Router
-  )
-    {
+  ) {
       if (localStorage.getItem('currentUser')) {
         router.navigate(['tables']);
       } else {
@@ -36,8 +36,13 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('currentUserId', data.user.id);
         localStorage.setItem('token', data.token);
         console.log(localStorage.getItem('currentUser'));
+        this.error = false;
       },
-      err => console.log('ERROR!!!'),
+      err => {
+
+        console.log('ERROR!!!');
+        this.error = true;
+      },
       () => {
 
           console.log('Got response from API');

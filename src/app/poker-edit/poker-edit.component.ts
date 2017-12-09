@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {PokerTable} from '../_models/pokertable';
 import { Location } from "@angular/common";
 import 'rxjs/add/operator/switchMap';
+import {ErrorMessage} from "../_models/errormessage";
 
 @Component({
   selector: 'app-poker-edit',
@@ -14,7 +15,8 @@ import 'rxjs/add/operator/switchMap';
 export class PokerEditComponent implements OnInit {
 
   table: PokerTable;
-
+  errorMessage: ErrorMessage[] = [];
+  success: boolean;
   constructor(
     private route: ActivatedRoute,
     private tableService: TableService,
@@ -38,13 +40,24 @@ export class PokerEditComponent implements OnInit {
   }
 
   async onFormSubmit(table: PokerTable) {
-    console.log(table);
+    this.table = table;
     if (table.id > 0) {
       console.log('form', table);
-      await this.tableService.updateTable(table.id, table).subscribe(message => this.location.back());
+      await this.tableService.updateTable(table.id, table).subscribe(message => {
+          console.log('success');
+          this.success = true;
+          this.errorMessage = [];
+        }
+      , error => {
+          this.errorMessage = error.error
+          this.success = false;
+      }
+        );
       console.log('update');
     } else {
-      await this.tableService.addTable(table).subscribe(message => this.location.back());
+      await this.tableService.addTable(table).subscribe(message => this.location.back()
+        , error => this.errorMessage = error.error
+          );
     }
   }
 }
