@@ -71,10 +71,32 @@
       </div>
     </div>
   </div>
+  <div class="chat-box">
   <div #list class="message-box" [scrollTop]="list.scrollHeight">
     <div *ngFor="let message of messages" role="listitem">{{message}}</div>
-  </div>
 
+  </div>
+  <div class="form-group">
+    <form  #chatForm="ngForm" >
+      <mat-form-field class="chat-box">
+        <input
+          name="chatMessage"
+          [(ngModel)]="chatMessage"
+          matInput type="text"
+          placeholder="Üzenet..."
+          required
+          #chat="ngModel">
+        <mat-error *ngIf="chat.invalid && (chat.dirty || chat.touched) && chat.errors.required">
+          Szükséges egy üzenet!
+        </mat-error>
+      </mat-form-field>
+
+      <button [disabled]="!chatForm.valid" type="submit" mat-raised-button color="primary"  (click)="this.sendChat()" >
+        <span>Üzenet elkdüldése</span>
+      </button>
+    </form>
+  </div>
+  </div>
   <div *ngIf="this.user" class="my-tools">
     <div class="informations">
       <div class="information">

@@ -5,5 +5,6 @@ export enum Action {
   ALL_IN = 'ALL_IN',
   RAISE = 'RAISE',
   CHECK = 'CHECK',
+  CHAT = 'CHAT',
 
 }

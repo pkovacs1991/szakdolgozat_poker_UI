@@ -30,7 +30,7 @@ export class TableComponent implements OnInit {
   possibleRaiseAction: string[] = [];
   tableId;
   messages: string[] = [];
-
+  chatMessage: string;
 
   constructor(private socketService: SocketService,
               private userService: UserService,
@@ -131,6 +131,11 @@ export class TableComponent implements OnInit {
 
   allIn() {
     this.sendMessage(JSON.stringify({action: Action.RAISE, amount: this.user.balance, table: this.tableId}));
+  }
+
+  sendChat() {
+    this.sendMessage(JSON.stringify({action: Action.CHAT, table: this.tableId, message: this.chatMessage}));
+    this.chatMessage = '';
   }
 
   public sendMessage(message: string): void {
