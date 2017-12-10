@@ -25,11 +25,9 @@
         [(ngModel)]="model.password"
         matInput type="password"
         placeholder="Jelszó"
-        required
+
         #password="ngModel">
-      <mat-error *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
-        Szükséges egy jelszót megadni!
-      </mat-error>
+
     </mat-form-field>
       <br>
 

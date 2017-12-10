@@ -13,7 +13,7 @@ import { TableComponent } from './table/table.component';
 import {HttpClientModule} from '@angular/common/http';
 import {MockBackend} from '@angular/http/testing';
 import {LoginService} from './_service/login.service';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './_guards/AuthGuard';
 import {RegisterService} from './_service/register.service';
 import {TableService} from './_service/table.service';
@@ -76,6 +76,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule, MatButtonModule, MatMenuModule, MatIconModule,
     MatFormFieldModule, MatInputModule, MatSelectModule, MatListModule,
     MatPaginatorModule, MatTableModule, MatButtonToggleModule

@@ -85,8 +85,9 @@
           matInput type="text"
           placeholder="Üzenet..."
           required
-          #chat="ngModel">
-        <mat-error *ngIf="chat.invalid && (chat.dirty || chat.touched) && chat.errors.required">
+
+         >
+        <mat-error >
           Szükséges egy üzenet!
         </mat-error>
       </mat-form-field>
@@ -123,11 +124,31 @@
     <div class="my-options">
       <p>Lehetőségek:</p>
       <div *ngIf="this.myTurn() && this.userBet >= this.tableStatus.currentBet" class="option"><button type="submit" (click)="check()" class="btn btn-success">Check</button></div>
-      <div *ngIf="this.myTurn() && this.userBet < this.tableStatus.currentBet" class="option"><button type="submit" (click)="call()" class="btn btn-success">Tart</button> {{this.tableStatus.currentBet - this.userBet}} pénzzel</div>
+      <div *ngIf="this.myTurn() && this.userBet < this.tableStatus.currentBet  && ((this.tableStatus.currentBet - this.userBet) < this.user.balance)" class="option"><button type="submit" (click)="call()" class="btn btn-success">Tart</button> {{this.tableStatus.currentBet - this.userBet}} pénzzel</div>
       <div *ngIf="this.myTurn()" class="option"><button type="submit" (click)="fold()" class="btn btn-success">Bedob</button></div>
       <div *ngIf="this.myTurn() && canRaise()"  class="option">
-        <input [(ngModel)]="amount" type="text" [disabled]="!this.myTurn()" class="form-control raise" id="raise" name="raise" placeholder="100">
-        <button [disabled]="!this.myTurn()" type="submit" (click)="raise()" class="btn btn-success">Emel</button>
+        <form   #raiseForm="ngForm" >
+          <mat-form-field class="raise">
+            <input
+              name="raise"
+              [(ngModel)]="amount"
+              matInput type="number"
+              placeholder="100"
+              required
+              min="0" max="100"
+              [formControl]="raiseFormControl"
+              >
+
+            <mat-error *ngIf="raiseFormControl.invalid && (raiseFormControl.dirty || raiseFormControl.touched) && (raiseFormControl.errors.min || raiseFormControl.errors.max) ">
+              Min: {{this.table.minBid}}
+             <br>
+              Max: {{this.table.maxBid}}
+            </mat-error>
+          </mat-form-field>
+
+        </form>
+
+        <button [disabled]="!this.myTurn() || !raiseForm.valid || !this.isValid()" type="submit" (click)="raise()" class="btn btn-success">Emel</button>
       </div>
       <div *ngIf="this.myTurn() && canRaise()"  class="option"><button [disabled]="!this.myTurn()" type="submit" (click)="allIn()"  class="btn btn-success">All in</button></div>
 

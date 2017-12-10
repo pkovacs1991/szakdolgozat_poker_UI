@@ -12,6 +12,9 @@ import {Card} from '../_models/card';
 import {CardService} from "../_service/card.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import "rxjs/add/operator/switchMap";
+import {FormControl, Validators} from "@angular/forms";
+import {TableService} from "../_service/table.service";
+import {PokerTable} from "../_models/pokertable";
 
 @Component({
   selector: 'app-table',
@@ -20,6 +23,7 @@ import "rxjs/add/operator/switchMap";
 })
 export class TableComponent implements OnInit {
 
+  raiseFormControl = new FormControl("", [Validators.max(100), Validators.min(0)]);
   action = Action;
   user: User;
   ioConnection: any;
@@ -29,12 +33,14 @@ export class TableComponent implements OnInit {
   amount: number;
   possibleRaiseAction: string[] = [];
   tableId;
+  table: PokerTable;
   messages: string[] = [];
   chatMessage: string;
 
   constructor(private socketService: SocketService,
               private userService: UserService,
               private cardService: CardService,
+              private tableService: TableService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -49,6 +55,17 @@ export class TableComponent implements OnInit {
         return Observable.of({});
       })
       .subscribe();
+
+    this.tableService.getTable(this.tableId).subscribe(
+      (table) => {
+        this.table = table;
+        this.raiseFormControl = new FormControl('', [
+          Validators.required,
+          Validators.min(table.minBid),
+          Validators.max(table.maxBid)
+        ]);
+      }
+    );
 
     this.initModel();
     setTimeout(() => {
@@ -88,6 +105,9 @@ export class TableComponent implements OnInit {
           this.tableStatus.smallBlind = content.smallBlind;
           this.tableStatus.bigBlind = content.bigBlind;
           this.tableStatus.table = content.table;
+
+
+          console.log('maxbid', this.tableStatus.table.maxBid);
           this.tableStatus.currentBet = content.currentBet;
           this.tableStatus.tableCards = this.getTableCards(content.tableCards);
           this.getPossibleRaiseActions(content.possibleRaiseActions);
@@ -238,5 +258,11 @@ export class TableComponent implements OnInit {
     return false;
   }
 
+  isValid(): boolean {
+
+    return this.amount <= this.tableStatus.table.maxBid
+      && this.amount >= this.tableStatus.table.minBid
+      && this.amount < this.user.balance;
+  }
 
 }

@@ -23,9 +23,8 @@ export class UserFormComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.user);
     this.model = Object.assign({}, this.user);
-    console.log(this.model);
+    this.model.password = '';
   }
 
   resetBalance() {
