@@ -114,7 +114,8 @@ export class TableComponent implements OnInit {
           this.userService.getCurrentUser().subscribe( (user) => this.user = user);
           this.getUserHand(content.hand);
           this.getUserBet(content.userBets);
-        } else {
+        } else if (content.reset) {
+          this.tableStatus = new TableStatus();
         }
 
         if (content.message) {
@@ -190,7 +191,7 @@ export class TableComponent implements OnInit {
   }
 
   myTurn() {
-    return this.tableStatus.turn && this.tableStatus.turn.id === this.user.id;
+    return this.tableStatus && this.tableStatus.turn && this.tableStatus.turn.id === this.user.id;
   }
 
   getUserHand(hand ) {

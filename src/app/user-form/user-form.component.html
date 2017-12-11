@@ -25,7 +25,7 @@
         [(ngModel)]="model.password"
         matInput type="password"
         placeholder="Jelszó"
-
+        [required]="!this.loggedInUser"
         #password="ngModel">
 
     </mat-form-field>

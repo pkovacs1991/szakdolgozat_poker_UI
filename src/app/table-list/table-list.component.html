@@ -1,22 +1,6 @@
 <div class="app-container">
   <h1>Asztalok böngészése</h1>
-  <form action="searchTableAction" method="GET">
-    <div class="row full-length">
-      <div class="col-md-3">
-        <div class="form-group">
-          <label for="inputMinLimit">Minimum limit</label>
-          <input type="text" class="form-control" placeholder="Minimum limit" id="inputMinLimit" name="minLimit" value="">
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="form-group">
-          <label>&nbsp;</label>
-          <button class="btn btn-block btn-primary" type="submit">Szűrés</button>
-        </div>
-      </div>
-    </div>
-  </form>
+  
 
   <div *ngIf="tables && tables.length > 0"  class="row  full-length">
 
