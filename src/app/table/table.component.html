@@ -1,4 +1,5 @@
-<div class="main app-container" >
+
+<div class="main app-container poker-background max-length" >
 
 
     <div class="player-left-box" *ngIf="this.tableStatus">
@@ -34,25 +35,20 @@
         <p *ngIf="this.isSmallBlind(this.tableStatus.users[4])">Kisvak</p>
         <p *ngIf="this.isBigBlind(this.tableStatus.users[4])">Nagyvak</p>
       </div>
-      <div *ngIf="this.tableStatus.users && this.tableStatus.users[5]" class="player bottom right">
+
+    </div>
+    <div class="player-right-box" *ngIf="this.tableStatus">
+      <div *ngIf="this.tableStatus.users && this.tableStatus.users[5]" class="player  top">
         <p>{{this.tableStatus.users[5].username}}</p>
         <p>Pénz: {{this.tableStatus.users[5].balance}}</p>
         <p *ngIf="this.isSmallBlind(this.tableStatus.users[5])">Kisvak</p>
         <p *ngIf="this.isBigBlind(this.tableStatus.users[5])">Nagyvak</p>
       </div>
-    </div>
-    <div class="player-right-box" *ngIf="this.tableStatus">
-      <div *ngIf="this.tableStatus.users && this.tableStatus.users[6]" class="player  top">
+      <div *ngIf="this.tableStatus.users && this.tableStatus.users[6]" class="player  middle">
         <p>{{this.tableStatus.users[6].username}}</p>
         <p>Pénz: {{this.tableStatus.users[6].balance}}</p>
         <p *ngIf="this.isSmallBlind(this.tableStatus.users[6])">Kisvak</p>
         <p *ngIf="this.isBigBlind(this.tableStatus.users[6])">Nagyvak</p>
-      </div>
-      <div *ngIf="this.tableStatus.users && this.tableStatus.users[7]" class="player  middle">
-        <p>{{this.tableStatus.users[7].username}}</p>
-        <p>Pénz: {{this.tableStatus.users[7].balance}}</p>
-        <p *ngIf="this.isSmallBlind(this.tableStatus.users[7])">Kisvak</p>
-        <p *ngIf="this.isBigBlind(this.tableStatus.users[7])">Nagyvak</p>
       </div>
   </div>
 
@@ -150,7 +146,7 @@
 
         <button [disabled]="!this.myTurn() || !raiseForm.valid || !this.isValid()" type="submit" (click)="raise()" class="btn btn-success">Emel</button>
       </div>
-      <div *ngIf="this.myTurn() && canRaise()"  class="option"><button [disabled]="!this.myTurn()" type="submit" (click)="allIn()"  class="btn btn-success">All in</button></div>
+
 
 
 

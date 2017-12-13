@@ -32,7 +32,10 @@ export class UserFormComponent implements OnChanges {
   resetBalance() {
     console.log('called');
     this.userService.resetBalance().subscribe( next => {
-      this.userService.getCurrentUser().subscribe(user =>  this.model = user);
+      this.userService.getCurrentUser().subscribe((user) => {
+          this.model = user;
+          this.model.password = '';
+        });
       }
     );
 

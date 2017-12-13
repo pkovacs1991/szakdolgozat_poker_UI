@@ -21,12 +21,17 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('currentUser')) {
+      this.router.navigate(['tables']);
+    } else {
+      this.user = new User();
+    }
   }
 
   async onFormSubmit(user: User) {
     this.user = user;
     this.registerService.register(user).subscribe(
-      (data) => {console.log(data);
+      (data) => {
         this.errorMessage = [];
         this.success = false;
         this.router.navigate(['login']);
