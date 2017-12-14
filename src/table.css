@@ -1,17 +1,21 @@
+.main {
+  height: 800px;
+}
 
 .poker-table {
   max-width: 1250px;
   background-color: green;
-  height: 500px;
+  max-height: 500px;
   width: 80%;
   border-radius: 50%;
   margin: 0 auto;
   border: 1em solid black;
+  height: 50%;
 }
 
 .board {
     float: left;
-    margin-top: 15%;
+    margin-top: 7%;
     margin-left: 37%;
 }
 
