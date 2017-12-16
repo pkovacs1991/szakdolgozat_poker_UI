@@ -1,8 +1,6 @@
-.main {
-  width: 1500px;
-}
 
 .poker-table {
+  max-width: 1250px;
   background-color: green;
   height: 500px;
   width: 80%;
@@ -13,8 +11,8 @@
 
 .board {
     float: left;
-    margin-top: 170px;
-    margin-left: 415px;
+    margin-top: 15%;
+    margin-left: 37%;
 }
 
 .cards {
@@ -120,12 +118,13 @@
 }
 
 .my-tools{
-
+    background-image: url("/assets/chips.jpg");
     float: right;
     border: solid black;
     border-radius: 10%;
     width: 350px;
     height: 275px;
+    background-size: 360px;
 }
 
 .my-cards{
@@ -145,7 +144,9 @@
     margin-top: 15px;
     float: right;
     width: 145px;
-    height: 250px;
+    height: 154px;
+  background: #ddddddba;
+
 }
 
 .option {

@@ -1,6 +1,6 @@
 
+  <div class="cards-img"> <img width="300" src="../../assets/cards.jpg" /> </div>
 <div class="main app-container poker-background max-length" >
-
 
     <div class="player-left-box" *ngIf="this.tableStatus">
       <div *ngIf="this.tableStatus.users && this.tableStatus.users[0]" class="player top">
@@ -117,7 +117,7 @@
       </div>
     </div>
 
-    <div class="my-options">
+    <div class="my-options my-options-background">
       <p>Lehetőségek:</p>
       <div *ngIf="this.myTurn() && this.userBet >= this.tableStatus.currentBet" class="option"><button type="submit" (click)="check()" class="btn btn-success">Check</button></div>
       <div *ngIf="this.myTurn() && this.userBet < this.tableStatus.currentBet  && ((this.tableStatus.currentBet - this.userBet) < this.user.balance)" class="option"><button type="submit" (click)="call()" class="btn btn-success">Tart</button> {{this.tableStatus.currentBet - this.userBet}} pénzzel</div>
